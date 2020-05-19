@@ -19,6 +19,8 @@ namespace CompanyEmployees.OAuth
                 .AddTestUsers(InMemoryConfig.GetUsers())
                 .AddInMemoryClients(InMemoryConfig.GetClients())
                 .AddDeveloperSigningCredential(); // Not for production. Use AddSigningCredentials
+
+            services.AddControllersWithViews();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -28,7 +30,13 @@ namespace CompanyEmployees.OAuth
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles(); // serve from wwwroot
+            app.UseRouting();
+
             app.UseIdentityServer();
+
+            app.UseAuthorization();
+            app.UseEndpoints(e => e.MapDefaultControllerRoute());
         }
     }
 }
