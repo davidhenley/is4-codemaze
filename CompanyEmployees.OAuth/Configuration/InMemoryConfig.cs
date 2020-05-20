@@ -50,8 +50,14 @@ namespace CompanyEmployees.OAuth.Configuration
                     ClientId = "company-employee",
                     ClientSecrets = new [] { new Secret("codemazesecret".Sha512()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId }
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId, "companyApi" }
                 }
+            };
+
+        public static IEnumerable<ApiResource> GetApiResources() =>
+            new List<ApiResource>
+            {
+                new ApiResource("companyApi", "CompanyEmployee API")
             };
     }
 }

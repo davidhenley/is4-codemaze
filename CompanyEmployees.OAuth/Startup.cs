@@ -15,6 +15,7 @@ namespace CompanyEmployees.OAuth
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityServer()
+                .AddInMemoryApiResources(InMemoryConfig.GetApiResources())
                 .AddInMemoryIdentityResources(InMemoryConfig.GetIdentityResources())
                 .AddTestUsers(InMemoryConfig.GetUsers())
                 .AddInMemoryClients(InMemoryConfig.GetClients())
